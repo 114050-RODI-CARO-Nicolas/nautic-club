@@ -1,6 +1,6 @@
-$(document).ready(function(){
+/* $(document).ready(function(){
     showMembers();
-})
+}) */
 
 function showMembers(){
 ///*showMembers hecha con jQuery
@@ -27,6 +27,50 @@ function showMembers(){
     });
 
 }
+
+function showMembersVanillaFetch(){
+
+    fetch("https://localhost:7136/api/Socio/get")
+    .then(response=>response.json())
+    .then(data=>{
+        const tableBody=document.getElementById('table-body');
+        tableBody.innerHTML='';
+
+        data.forEach(element => {
+            const row=document.createElement('tr');
+            row.innerHTML=`
+            <td>${element.id}</td>
+            <td>${element.apellido}</td>
+            <td>${element.nombre}</td>
+            <td>${element.telefono}</td>
+            `;
+            tableBody.appendChild(row);
+            
+        });
+
+    })
+    .catch(error=>{
+        console.error("Error", error)
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function handleFormSubmit(event){
@@ -79,4 +123,8 @@ function postMember(member){
 
 
 }
+
+
+//showMembersVanillaFetch();
+showMembers();
 
